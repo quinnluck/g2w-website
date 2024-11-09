@@ -1,10 +1,12 @@
 import './App.css'
-import DonationTable from './DonationTable/components/DonationTable'
+import DonationTableSelector from './DonationTable/DonationTableSelector'
+
 
 function App() {
   return (
     <>
-      <DonationTable />
+      <DonationTableSelector />
+      {/* <DonationTable title="Donation Table" columns={basicColumns}/> */}
     </>
   )
 }

@@ -1,22 +1,50 @@
-import { DataGrid, GridRowsProp, GridColDef } from "@mui/x-data-grid";
+import { useState } from "react";
+import { DataGrid, GridRowsProp, GridColDef, useGridApiRef } from "@mui/x-data-grid";
+import {
+  Box,
+  Stack,
+  Button 
+} from '@mui/material';
 
+interface DonationTableProps {
+  title: string,
+  columns: GridColDef[]
+}
 
-export default function DonationTable() {
-  const rows: GridRowsProp = [
-    { id: 1, col1: 'Hello', col2: 'World' },
-    { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-    { id: 3, col1: 'MUI', col2: 'is Amazing' },
-  ];
+/*
+I want to make default Donation Tables to be used for different events (clan bingo etc)
+*/
+export default function DonationTable({ title, columns }: DonationTableProps) {
+  const apiRef = useGridApiRef()  
+  const [rows, setRows] = useState<GridRowsProp>([])
+  const [idCounter, setIdCounter] = useState(0)
 
-  const columns: GridColDef[] = [
-    { field: 'col1', headerName: 'Column 1', width: 150 },
-    { field: 'col2', headerName: 'Column 2', width: 150 },
-  ];
+  // const [idCounter, setIdCounter] = useState(0)
+
+  // useEffect(() => {
+  //   /* need to grab data from DB */
+  //  SetIdCounter to length
+  // })
+
+  const  handleAddRow = () => {
+    const newCount = idCounter + 1
+    apiRef.current?.updateRows([{ id: newCount, username: "", donation_amount: "" }])
+    setIdCounter(newCount)
+    // add to DB as well
+  }
+
 
   return (
-    <div>
-        <div>Donation Table</div>
-        <DataGrid rows={rows} columns={columns} />
-    </div>
+    <Box sx={{ width: '100%' }}>
+      <div>{title}</div>
+      <Stack direction="row" spacing={1}>
+        <Button size="small" onClick={handleAddRow}>
+          Add Row
+        </Button>
+      </Stack>
+      <Box sx={{ width: '100%', mt: 1 }}>
+        <DataGrid apiRef={apiRef} rows={rows} columns={columns} editMode="row" />
+      </Box>
+    </Box>
   )
 }
