@@ -16,6 +16,7 @@ I want to make default Donation Tables to be used for different events (clan bin
 */
 export default function DonationTable({ title, columns }: DonationTableProps) {
   const apiRef = useGridApiRef()  
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [rows, setRows] = useState<GridRowsProp>([])
   const [idCounter, setIdCounter] = useState(0)
 

@@ -1,14 +1,14 @@
-import './App.css'
-import DonationTableSelector from './DonationTable/DonationTableSelector'
-
+import "./App.css";
+import DonationTableSelector from "./DonationTable/DonationTableSelector";
 
 function App() {
   return (
     <>
-      <DonationTableSelector />
-      {/* <DonationTable title="Donation Table" columns={basicColumns}/> */}
+      <div>
+        <DonationTableSelector />
+      </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
